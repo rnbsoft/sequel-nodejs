@@ -1,0 +1,132 @@
+<h1>LiCY Test</h1>
+<div class="container"> 
+    <div class="card-deck">   
+        <div class="card form-group">
+            <h3 class="card-header">로그인</h3>
+            <form class="card-block form-group" id="loginForm">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" id="phone" ng-model="vm.loginForm.stringPhoneNum">
+                
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" ng-model="vm.loginForm.stringPassword">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" ng-model="vm.loginForm.booleanAdmin">
+                        관리자 모드
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="vm.login()">Login</button>
+                
+            </form>
+        </div>
+        <div class="card form-group">
+            <h3 class="card-header">조회</h3>
+            <div class="card-block">
+                <button class="btn btn-outline-primary" ng-click="vm.getQuickControl()">퀵제어값 조회</button>
+            </div>
+            <div class="card-block row">
+                <input type="number" class="form-control col" placeholder="그룹번호" ng-model="vm.getForm.id">
+                <button class="btn btn-outline-primary" ng-click="vm.getGroupStatus()">그룹상태</button>
+            </div>
+            <div class="card-block row">
+                <input type="number" class="form-control col-6 col-lg" ng-model="vm.getForm.start" placeholder="시작">                
+                <input type="number" class="form-control col-6 col-lg" ng-model="vm.getForm.length" placeholder="건수">
+                <button class="btn btn-outline-primary" ng-click="vm.getGroupList()">그룹목록</button>
+            </div>
+        </div>
+        <div class="card form-group">
+            <h3 class="card-header">퀵제어</h3>
+            <form class="card-block form-group" id="quickForm" ng-app="qcApp">
+                <div class="btn-group">
+                    <label class="btn btn-secondary btn-success" 
+                        uib-btn-radio="true"
+                        ng-model="vm.quickControl.booleanOutMode"
+                        ng-change="vm.updateQuickControl()">
+                        외출모드ON
+                    </label>
+                    <label class="btn btn-secondary btn-success" 
+                        uib-btn-radio="true"
+                        ng-model="vm.quickControl.booleanOutMode"
+                        ng-change="vm.updateQuickControl()">
+                        외출모드OFF
+                    </label>
+                </div>   
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-warning active">
+                        <input type="radio" name="options" checked
+                            ng-model="vm.quickControl.booleanAllOn" value="true"
+                            ng-change="vm.updateQuickControl(value)">전체점등설정
+                    </label>
+                    <label class="btn btn-warning">
+                        <input type="radio" name="options" 
+                            ng-model="vm.quickControl.booleanAllOn" value="false"
+                            ng-change="vm.updateQuickControl(value)">전체점등해제
+                    </label>
+                </div>   
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-danger active">
+                        <input type="radio" name="options" checked
+                            ng-model="vm.quickControl.booleanAllOff" value="true"
+                            ng-change="vm.updateQuickControl(value)">전체소등설정
+                    </label>
+                    <label class="btn btn-danger">
+                        <input type="radio" name="options" 
+                            ng-model="vm.quickControl.booleanAllOff" value="false"
+                            ng-change="vm.updateQuickControl(value)">전체소등해제
+                    </label>
+                </div>                
+            </form>
+        </div>
+    </div>
+    <div class="card-deck">
+        <div class="card form-group">
+            <h3 class="card-header">조명제어</h3>
+            
+            <div class="card-block row">
+                <input type="number" class="form-control col-sm-3" ng-model="vm.setGroup.id" placeholder="그룹번호">                
+            </div>                
+            <div class="card-block row">
+                <p class="card-text col-12">그룹명 변경</p>
+                <input type="text" class="form-control col-sm-6" ng-model="vm.setGroup.stringGroupName" placeholder="그룹명">
+                <button class="btn btn-primary" ng-click="vm.updateGroupName()">그룹명변경</button>
+            </div>
+            <div class="card-block row">
+                <p class="card-text col-12">제어값 설정</p>
+                <div class="col-12 row">
+                <select required class="custom-select form-control col-6 offset-3" ng-model="vm.setGroup.stringControl">
+                    <option value="">모드선택</option>
+                    <option ng-repeat="mode in vm.modes" ng-value="mode.value">{{mode.text}}</option>
+                </select>
+                 </div>
+                <p class="card-text col-12"> </p>
+                <div class="input-group input-group-lg col-sm-5"
+                    ng-if="vm.setGroup.stringControl != 4">
+                    <span class="input-group-addon" id="sizing-addon1">최대밝기</span>
+                    <input type="text" class="form-control" reset ng-model="vm.setGroup.ControlParam.numericHigh" aria-describedby="sizing-addon1">
+                </div>
+                <div class="input-group input-group-lg col-sm-5"
+                    ng-if="vm.setGroup.stringControl != 4">
+                    <span class="input-group-addon" id="sizing-addon2">최소밝기</span>
+                    <input type="text" class="form-control" reset ng-model="vm.setGroup.ControlParam.numericLow" aria-describedby="sizing-addon2">
+                </div>
+                <div class="input-group input-group-lg col-sm-5"
+                    ng-if="vm.setGroup.stringControl == 1 || vm.setGroup.stringControl == 2" >
+                    <span class="input-group-addon" id="sizing-addon3">ON-TIME</span>
+                    <input type="text" class="form-control" reset 
+                        ng-model="vm.setGroup.ControlParam.numericOnTime" aria-describedby="sizing-addon3">
+                </div>
+                <div class="input-group input-group-lg col-sm-5"
+                    ng-if="vm.setGroup.stringControl == 1 || vm.setGroup.stringControl == 2">
+                    <span class="input-group-addon" id="sizing-addon4">OFF-TIME</span>
+                    <input type="text" class="form-control" reset ng-model="vm.setGroup.ControlParam.numericOffTime" aria-describedby="sizing-addon4">
+                </div>
+                <div class="input-group input-group-lg col-sm-5"
+                    ng-if="vm.setGroup.stringControl == 4">
+                    <span class="input-group-addon" id="sizing-addon5">디밍 TIME</span>
+                    <input type="text" class="form-control" reset ng-model="vm.setGroup.ControlParam.numericDim" aria-describedby="sizing-addon5">
+                </div>
+                <button class="btn btn-primary" ng-click="vm.updateGroupStatus()">적용</button>
+            </div>
+        </div>    
+    </div>
+</div>

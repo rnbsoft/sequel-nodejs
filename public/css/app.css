@@ -1,0 +1,16 @@
+body {
+    padding: 20px 0;
+}
+
+.nav-tabs li {
+    padding-right: 20px;
+}
+ 
+.flash-message {
+    margin-top: 20px;
+}
+
+.input-group-addon {
+    min-width:150px;
+    text-align:center;
+}
