@@ -2,6 +2,7 @@
 Sequelize, NodeJS, AngularJS
 
 1. copy following to config.json
+```javascript
     {
         "local" : {
             "connectionString": "mysql://node:node@localhost:3306/test?debug=true",
@@ -16,6 +17,8 @@ Sequelize, NodeJS, AngularJS
 
         }
     }
+ ```
+ 
 
 
 
