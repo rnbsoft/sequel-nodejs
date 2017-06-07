@@ -5,7 +5,7 @@
   "description": "Sequelize Nodejs application",
   "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV=development&& nodemon -i app/* server.js"
+    "start": "set NODE_ENV=development&& nodemon -i server.js"
   },
   "repository": {
     "type": "git",
