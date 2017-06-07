@@ -16,7 +16,7 @@ fs
         (file.indexOf('index.js') !== 0) &&
         (file.slice(-3) === '.js'))
     .forEach(file => {
-        const filename = __dirname + '\\' + file
+        const filename = __dirname + '/' + file
         console.log("Loading model from file: " + filename)
         const model = sequelize.import(filename);
         db[model.name] = model;
