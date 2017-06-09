@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV || 'local'
 const config = require('config.json')[env]
 const sequelize = require('server/models').sequelize
 
-console.log("process.env.NODE_ENV ----> " + process.env.NODE_ENV)
+console.log("process.env.NODE_ENV ----> " + env)
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/server/views')
@@ -40,3 +40,11 @@ app.get('/', function(req, res) {
 const server = app.listen(3000, function() {
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
 })
+
+// socket.io to control npm start
+let io = require('socket.io')(server);
+io.on('connection', (socketServer) => {
+  socketServer.on('npmStop', () => {
+    process.exit(0);
+  });
+});

@@ -5,7 +5,8 @@
   "description": "Sequelize Nodejs application",
   "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV=development&& nodemon -i server.js"
+    "start": "set NODE_ENV=development&& node server.js",
+    "stop": "node server.stop.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,8 @@
     "request-promise": "^4.2.1",
     "rootpath": "^0.1.2",
     "sequelize": "^3.30.4",
-    "serve-favicon": "^2.4.2"
+    "serve-favicon": "^2.4.2",
+    "socket.io": "^2.0.2"
   },
   "devDependencies": {
     "webpack": "^2.6.1"
